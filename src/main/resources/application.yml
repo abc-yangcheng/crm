@@ -1,0 +1,67 @@
+## 端口号  上下文路径
+server:
+  port: 8090
+  servlet:
+    context-path: /
+
+# swagger localhost:8080/swagger-ui.html
+swagger:
+  enable: true
+
+#mybatis-plus配置，驼峰命名已自动开启默认true 二级缓存也是默认开启
+mybatis-plus:
+  mapper-locations: classpath:/mappers/*Mapper.xml
+  global-config:
+    db-config:
+      logic-delete-field: is_valid  # 全局逻辑删除的实体字段名
+      logic-delete-value: 0 # 逻辑已删除值
+      logic-not-delete-value: 1 # 逻辑未删除值
+#      id-type: auto
+#      table-prefix: t_
+## 数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/crm?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  ## freemarker
+  freemarker:
+    suffix: .ftl
+    content-type: text/html
+    charset: UTF-8
+
+  ## 启用热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+
+## pageHelper
+pagehelper:
+  helper-dialect: mysql
+
+## 设置 dao 日志打印级别
+logging:
+  level:
+    top:
+      upstudy:
+        crm:
+          mapper: debug
+
+
+  #    邮箱配置
+Spring:
+  mail:
+    host: smtp.qq.com
+    username: 663524190@qq.com
+    password: njwsytbrpqtqbehf
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true

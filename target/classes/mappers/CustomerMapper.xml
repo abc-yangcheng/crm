@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.upstudy.crm.mapper.CustomerMapper">
+
+    <resultMap id="BaseResultMap" type="top.upstudy.crm.pojo.Customer" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="cus_manager" property="cusManager" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="VARCHAR" />
+        <result column="reputation" property="reputation" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="account_number" property="accountNumber" jdbcType="VARCHAR" />
+        <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, customer_id, name, cus_manager, level,reputation, address,  phone, account_number,  is_valid, create_date,
+    update_date
+    </sql>
+
+    <!-- 通过参数查询 state:1 未流失-->
+    <select id="selectByParams" parameterType="top.upstudy.crm.query.CustomerQuery" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from t_customer
+        <where>
+            is_valid=1
+            <if test="null !=Name and Name !=''">
+                and   name like concat('%',#{Name},'%')
+            </if>
+            <if test="null !=customerId and customerId !=''">
+                and customer_id =#{customerId}
+            </if>
+            <if test="null !=level and level !=''">
+                and level =#{level}
+            </if>
+        </where>
+    </select>
+
+</mapper>
